@@ -7,6 +7,7 @@ from time import sleep
 import os
 import json
 from bs4 import BeautifulSoup as BS
+import csv
 
 
 
@@ -57,8 +58,11 @@ def search_and_get_results(query):
     with open('youtube_results'+query, 'w') as result_file:
         json.dump(results_dict, result_file)
 
-
-queries = ['adele', 'khalid', 'ropafadzo beverly shava']
+with open('queries.csv', 'r') as inputF:
+    queries = []
+    reader = csv.reader(inputF)
+    for row in reader:
+        queries.append(row[0])
 
 for query in queries:
     search_and_get_results(query)
