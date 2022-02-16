@@ -15,13 +15,9 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome('driver/chromedriver',chrome_options=chrome_options)
-# chrome_options.add_experimental_option("prefs", { "profile.default_content_settings.geolocation": 1})
-# chrome_options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-# chrome_driver_binary = "/usr/local/bin/chromedriver"
+
 desired_cap = chrome_options.to_capabilities()
 
-# driverpath ='driver/chromedriver'
-# driver = webdriver.Chrome(executable_path=driverpath, chrome_options=chrome_options)
 
 base_url_g = u'https://google.com/search?q='
 youtube_base_url = 'https://youtube.com/'
