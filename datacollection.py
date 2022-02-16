@@ -23,6 +23,9 @@ base_url_g = u'https://google.com/search?q='
 youtube_base_url = 'https://youtube.com/'
 
 def y_search_bot(query):
+    '''
+    This helper function takes in a query and searches for that query on YouTube using Selenium. 
+    '''
     
     driver.get(youtube_base_url)
     sleep(5)
@@ -37,6 +40,10 @@ def y_search_bot(query):
 
     
 def y_get_results():
+     '''
+    This helper function collects the titles of the results on the YouTube SERP and returns all the titles in a list. 
+    '''
+
     result_links = []
     
     soup = BS(driver.page_source, 'html.parser')
@@ -47,6 +54,10 @@ def y_get_results():
     return result_links
 
 def search_and_get_results(query):
+
+    '''
+    Combines y_search_bot and y_get_results to search and collect results from YouTube.
+    '''
     y_search_bot(query)
     sleep(5)
 
@@ -57,9 +68,11 @@ def search_and_get_results(query):
     with open('youtube_results'+query, 'w') as result_file:
         json.dump(results_dict, result_file)
 
-
 queries = ['adele', 'khalid', 'ropafadzo beverly shava']
 
 for query in queries:
+    '''
+    Goes through the list of queries and searches for each query on YouTube. 
+    '''
     search_and_get_results(query)
 driver.close()
