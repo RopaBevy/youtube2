@@ -45,14 +45,14 @@ def y_get_results():
     This helper function collects the titles of the results on the YouTube SERP and returns all the titles in a list. 
     '''
 
-    result_links = []
+    #result_links = []
     
-    soup = BS(driver.page_source, 'html.parser')
-    search = soup.find_all('div', class_="text-wrapper style-scope ytd-video-renderer")
-    for h in search:
-        result_links.append(h.div.div.h3.a.get('title'))
+    #soup = BS(driver.page_source, 'html.parser')
+    #search = soup.find_all('div', class_="text-wrapper style-scope ytd-video-renderer")
+    #for h in search:
+        #result_links.append(h.div.div.h3.a.get('title'))
         
-    return result_links
+    return driver.page_source
 
 def search_and_get_results(query):
 
@@ -62,12 +62,12 @@ def search_and_get_results(query):
     y_search_bot(query)
     sleep(5)
 
-    results_dict = y_get_results()
+    result_html = y_get_results()
 
     sleep(5)
 
-    with open('youtube_results'+query, 'w') as result_file:
-        json.dump(results_dict, result_file)
+    with open('SERP/{}.html'.format(query), 'w') as result_file:
+        json.dump(result_html, result_file)
 
 with open('queries.csv', 'r') as inputF:
     queries = []
