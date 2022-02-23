@@ -53,9 +53,11 @@ def search_and_get_results(query):
     sleep(5)
 
     with open('SERP/{}.html'.format(query), 'w') as result_file:
-        result_file.write(result_html, result_file)
+        result_file.write(result_html)
 
 def search_all_queries(queries_file_csv):
+    os.mkdir('SERP')
+    
     with open(queries_file_csv, 'r') as inputF:
         queries = []
         reader = csv.reader(inputF)
