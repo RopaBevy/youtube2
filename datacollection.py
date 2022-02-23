@@ -39,45 +39,34 @@ def y_search_bot(query):
     search_icon = driver.find_element_by_xpath('/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/button')
     search_icon.click()
 
-    
-def y_get_results():
-    '''
-    This helper function collects the titles of the results on the YouTube SERP and returns all the titles in a list. 
-    '''
-
-    #result_links = []
-    
-    #soup = BS(driver.page_source, 'html.parser')
-    #search = soup.find_all('div', class_="text-wrapper style-scope ytd-video-renderer")
-    #for h in search:
-        #result_links.append(h.div.div.h3.a.get('title'))
-        
     return driver.page_source
+
 
 def search_and_get_results(query):
 
     '''
     Combines y_search_bot and y_get_results to search and collect results from YouTube.
     '''
-    y_search_bot(query)
-    sleep(5)
 
-    result_html = y_get_results()
+    result_html = y_search_bot(query)
 
     sleep(5)
 
     with open('SERP/{}.html'.format(query), 'w') as result_file:
-        json.dump(result_html, result_file)
+        result_file.write(result_html, result_file)
 
-with open('queries.csv', 'r') as inputF:
-    queries = []
-    reader = csv.reader(inputF)
-    for row in reader:
-        queries.append(row[0])
+def search_all_queries(queries_file_csv):
+    with open(queries_file_csv, 'r') as inputF:
+        queries = []
+        reader = csv.reader(inputF)
+        for row in reader:
+            queries.append(row[0])
 
-for query in queries:
-    '''
-    Goes through the list of queries and searches for each query on YouTube. 
-    '''
-    search_and_get_results(query)
-driver.close()
+    for query in queries:
+        '''
+        Goes through the list of queries and searches for each query on YouTube. 
+        '''
+        search_and_get_results(query)
+
+search_all_queries('queries.csv')
+# driver.close()
