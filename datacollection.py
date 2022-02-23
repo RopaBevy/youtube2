@@ -57,7 +57,7 @@ def search_and_get_results(query):
 
 def search_all_queries(queries_file_csv):
     os.mkdir('SERP')
-    
+
     with open(queries_file_csv, 'r') as inputF:
         queries = []
         reader = csv.reader(inputF)
@@ -71,4 +71,4 @@ def search_all_queries(queries_file_csv):
         search_and_get_results(query)
 
 search_all_queries('queries.csv')
-# driver.close()
+driver.close()
