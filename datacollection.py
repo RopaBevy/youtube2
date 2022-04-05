@@ -8,7 +8,7 @@ import os
 import json
 from bs4 import BeautifulSoup as BS
 import csv
-
+from datetime import datetime
 
 
 chrome_options = Options()
@@ -22,6 +22,7 @@ desired_cap = chrome_options.to_capabilities()
 
 base_url_g = u'https://google.com/search?q='
 youtube_base_url = 'https://youtube.com/'
+serp_folder_path = os.mkdir('SERP_{}'.format(datetime.now()))
 
 def y_search_bot(query):
     '''
@@ -52,11 +53,11 @@ def search_and_get_results(query):
 
     sleep(5)
 
-    with open('SERP/{}.html'.format(query), 'w') as result_file:
+    with open('{}/{}.html'.format(serp_folder_path, query), 'w') as result_file:
         result_file.write(result_html)
 
 def search_all_queries(queries_file_csv):
-    os.mkdir('SERP')
+    os.mkdir(serp_folder_path)
 
     with open(queries_file_csv, 'r') as inputF:
         queries = []
