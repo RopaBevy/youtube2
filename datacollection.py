@@ -15,14 +15,14 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-driver = webdriver.Chrome(executable_path='./chromedriver/chromedriver',chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path='./chromedriver',chrome_options=chrome_options)
 
 desired_cap = chrome_options.to_capabilities()
 
 
 base_url_g = u'https://google.com/search?q='
 youtube_base_url = 'https://youtube.com/'
-serp_folder_path = os.mkdir('SERP_{}'.format(datetime.now()))
+serp_folder_path = 'SERP_{}'.format(datetime.now())
 
 def y_search_bot(query):
     '''
